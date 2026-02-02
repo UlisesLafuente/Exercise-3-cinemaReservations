@@ -30,17 +30,18 @@ Class structure
 
     Contains the main()of the program.
         -Ask the user for the number of rows and seats per row.
-        -Create an instance of ReservationServicewith this data.
-        -Create the ConsoleUIand the service passes to him.
-        -Call ui.start()to start the program.
+        -Create an instance of ReservationService with this data.
+        -Create the ConsoleUI and the service passes to him.
+        -Call ui.start() to start the program.
         -It does not contain any validation or business logic.
 
 » ConsoleUI
 
-    Show the menu and read the user’s options.
-    Ask for data such as name, row and seat, and call the service methods.
-    Only manage input and output by console.
-    It contains no business rules or logical validation.
+    -Show the menu and read the user’s options.
+    -Ask for data such as name, row and seat, 
+        -and call the service methods.
+    (Only manage input and output by console.)
+    (It contains no business rules or logical validation.)
 
 » Reservation Service
 
