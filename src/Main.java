@@ -1,7 +1,6 @@
-
 void main() {
 
-    IO.println(String.format("Hello and welcome!"));
+    IO.println("Hello and welcome!");
 
     //Contains the main()of the program.
     //        -Ask the user for the number of rows and seats per row.
@@ -12,12 +11,12 @@ void main() {
 
     Scanner sc = new Scanner(System.in);
     System.out.print("Filas de asientos: ");
-    int rows= sc.nextInt();
+    int rows = sc.nextInt();
     System.out.print("Asientos por fila: ");
-    int seatsPerRow= sc.nextInt();
+    int seatsPerRow = sc.nextInt();
 
     ReservationService rs = new ReservationService(rows, seatsPerRow);
     ConsoleUI Cui = new ConsoleUI(rs);
 
-    }
+}
 
