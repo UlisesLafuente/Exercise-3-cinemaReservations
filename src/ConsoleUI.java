@@ -16,7 +16,7 @@ public class ConsoleUI {
         //    (It contains no business rules or logical validation.)
         //      It does not contain any validation or business logic.
 
-        while (true) {
+        do {
 
             System.out.printf(
                     "1.- Mostrar todas las butacas reservadas.%n" +
@@ -27,10 +27,7 @@ public class ConsoleUI {
                             "0.- Salir.%n");
 
             this.rs.selectOption();
-            if (!rs.isContinua()) {
-                break;
-            }
-        }
+        } while (rs.isContinua());
     }
 }
 

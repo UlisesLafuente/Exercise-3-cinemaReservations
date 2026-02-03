@@ -24,7 +24,7 @@ public class ReservationService {
             for (int i2 = 1; i2 <= seatsPerRow; i2++) {
                 Seat seat = new Seat(i, i2);
                 this.seats.add(seat);
-                System.out.println("añadido asiento" + i + " " + i2);
+                System.out.println("añadido asiento : Fila " + i + " Asiento " + i2);
             }
         }
     }
@@ -155,9 +155,9 @@ public class ReservationService {
         }
     }
 
-    public ArrayList<Seat> getAllSeats() {
-        return this.seats;
-    }
+//    public ArrayList<Seat> getAllSeats() {
+//        return this.seats;
+//    }
 
     public ArrayList<Seat> getSeatsByPerson(String name) {
         ArrayList<Seat> seatsByPerson = new ArrayList<>();
