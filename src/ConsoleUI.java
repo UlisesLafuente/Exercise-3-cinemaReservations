@@ -8,13 +8,6 @@ public class ConsoleUI {
     }
 
     public void start() {
-        //aquí iría el código con el menu
-        //Show the menu and read the user’s options.
-        //    -Ask for data such as name, row and seat,
-        //        -and call the service methods.
-        //    (Only manage input and output by console.)
-        //    (It contains no business rules or logical validation.)
-        //      It does not contain any validation or business logic.
 
         do {
 

@@ -154,11 +154,11 @@ public class ReservationService {
             s.setPersonName(null);
         }
     }
-
-//    public ArrayList<Seat> getAllSeats() {
-//        return this.seats;
-//    }
-
+/*
+      public ArrayList<Seat> getAllSeats() {
+          return this.seats;
+      }
+*/
     public ArrayList<Seat> getSeatsByPerson(String name) {
         ArrayList<Seat> seatsByPerson = new ArrayList<>();
 

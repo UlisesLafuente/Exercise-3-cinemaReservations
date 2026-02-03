@@ -10,13 +10,15 @@ public class Seat {
         this.seat = seat;
     }
 
-//    public int getRow() {
-//        return row;
-//    }
+/*    public int getRow() {
+        return row;
+        }
+*/
 
-//    public int getSeat() {
-//        return seat;
-//    }
+/*    public int getSeat() {
+        return seat;
+    }
+*/
 
     public String getPersonName() {
         return personName;
