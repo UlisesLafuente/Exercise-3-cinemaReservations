@@ -6,6 +6,7 @@ public class ConsoleUI {
 
     ConsoleUI(ReservationService rs){
         this.rs=rs;
+        start();
     }
 
     public void start(){
@@ -17,56 +18,19 @@ public class ConsoleUI {
         //    (It contains no business rules or logical validation.)
         //      It does not contain any validation or business logic.
 
+        while(true){
 
-        System.out.println(String.format(
-            "1.- Mostrar todas las butacas reservadas.%n" +
-            "2.- Mostrar todas las butacas reservadas por persona.%n" +
-            "3.- Reservar una butaca.%n" +
-            "4.- Anular la reserva de una butaca.%n" +
-            "5.- Anular todas las reservas de una persona.%n" +
-            "0.- Salir."));
+            System.out.println(String.format(
+                "1.- Mostrar todas las butacas reservadas.%n" +
+                "2.- Mostrar todas las butacas reservadas por persona.%n" +
+                "3.- Reservar una butaca.%n" +
+                "4.- Anular la reserva de una butaca.%n" +
+                "5.- Anular todas las reservas de una persona.%n" +
+                "0.- Salir."));
 
-        selec getInput("Selecciona una opción: ");
-
-    }
-
-    private String getInput(String message) {
-        Scanner sc = new Scanner(System.in);
-        System.out.print(message);
-        return sc.nextLine();
-    }
-
-    private void selectOption(int i){
-        switch (i){
-            case 1 -> {
-                //1.- Mostrar todas las butacas reservadas.
-                this.rs.getAllSeats();
-            }
-            case 2 ->{
-                //2.- Mostrar todas las butacas reservadas por persona.
-
-
-            }
-            case 3 ->{
-                //3.- Reservar una butaca.
-
-            }
-            case 4 ->{
-                //4.- Anular la reserva de una butaca.
-
-            }
-            case 5 ->{
-                //5.- Anular todas las reservas de una persona.
-                this.rs.cancelAllByPerson(
-                        getInput("Nombre de la persona: ");
-                );
-
-            }
-            case 0 ->{
-                System.out.print("Bye!");
-                break;
-            }
-            default -> System.out.print("Input inválido.");
+            this.rs.selectOption();
+            if (!rs.isContinua()){break;}
         }
     }
 }
+

@@ -14,29 +14,30 @@ public class Seat {
     private String personName;
 
     //CONSTRUCTOR
-    Seat(){
-
+    Seat(int row, int seat){
+        this.row=row;
+        this.seat=seat;
     }
 
-    public void reserveSeat(int row, int seat, String name){
-
+    public int getRow() {
+        return row;
     }
-    public void cancelSeat(int row, int seat){
 
+    public int getSeat() {
+        return seat;
     }
-    public void cancelAllByPerson(String name){
 
-    }
-    public List<Seat> getAllSeats(){
-
-    }
-    public List<Seat> getSeatsByPerson(String name){
-
+    public String getPersonName() {
+        return personName;
     }
 
     @Override
     public String toString(){
 
         return null;
+    }
+
+    public void setPersonName(String personName) {
+        this.personName = personName;
     }
 }
