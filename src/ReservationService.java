@@ -1,5 +1,7 @@
 import customExceptions.InvalidPersonNameException;
 import customExceptions.InvalidSeatException;
+import customExceptions.SeatAlreadyEmptyException;
+import customExceptions.SeatAlreadyTakenException;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -7,7 +9,7 @@ import java.util.Scanner;
 public class ReservationService {
     private final int totalRows;
     private final int seatsPerRow;
-    private final ArrayList<Seat> seats = new ArrayList<Seat>();
+    private final ArrayList<Seat> seats = new ArrayList<>();
     private boolean continua = true;
 
     //CONSTRUCTOR
@@ -16,7 +18,7 @@ public class ReservationService {
         this.seatsPerRow = seatsPerRow;
         createSeats(rows, seatsPerRow);
     }
-
+    //UTILITY///////////////////////////////////////////////////////////////////////
     private void createSeats(int rows, int seatsPerRow) {
         for (int i = 1; i <= rows; i++) {
             for (int i2 = 1; i2 <= seatsPerRow; i2++) {
@@ -49,6 +51,7 @@ public class ReservationService {
         return input;
     }
 
+    //MENU OPTIONS SWITCH/////////////////////////////////////////////////////////////////
     public void selectOption() {
         String i = getInput("Selecciona una opción: ");
         switch (i) {
@@ -89,10 +92,11 @@ public class ReservationService {
                 System.out.print("Bye!");
                 this.continua = false;
             }
-            default -> System.out.print("Input inválido.");
+            default -> System.out.print("Input no válido.");
         }
     }
 
+    //MENU LOGIC////////////////////////////////////////////////////////////////////
     private void showAllReservedSeats() {
         ArrayList<Seat> reservedSeats = new ArrayList<>();
         for (Seat s : this.seats) {
@@ -110,18 +114,38 @@ public class ReservationService {
     }
 
     public void reserveSeat(int row, int seat, String name) {
-        if (validateSeatPosition(row, seat) == "Empty") {
+        try{
+            String status = validateSeatPosition(row, seat);
+        if (status.equals("Vacío")) {
             Seat s = this.seats.get((row * seat) - 1);
             s.setPersonName(name);
-        } else if (validateSeatPosition(row, seat) == "Ocupado") {
-
+        } else if (status.equals("Ocupado")) {
+            throw new SeatAlreadyTakenException(
+                    "El asiento está ya ocupado, no se ha reservado nuevamente."
+            );
         }
-        //AÑADIR EL CÓDIGO DE VALIDACIÓN
+        } catch (Exception e){
+            System.err.println(e.getMessage());
+        }
     }
 
     public void cancelSeat(int row, int seat) {
-        this.seats.get((row * seat) - 1).setPersonName(null);
-        //FALTA VALIDAR
+        try{
+            String status = validateSeatPosition(row, seat);
+            if(status.equals("Ocupado")){
+                throw new SeatAlreadyEmptyException(
+                        "El asiento ya está vacío, no se ha anulado ninguna reserva."
+                );
+            }
+            else if (status.equals("Vacio")){
+                this.seats.get((row * seat) - 1).setPersonName(null);
+            }
+            else {
+                System.err.println("Estado del asiento inesperado: " + status);
+            }
+        } catch (Exception e){
+            System.err.println(e.getMessage());
+        }
     }
 
     public void cancelAllByPerson(String name) {
@@ -168,7 +192,7 @@ public class ReservationService {
                         "out-of-rank position: El número de asiento no es válido"
                 );
             } else {
-                if ((this.seats.get(((row + 1) * seat))).getPersonName() == null) {
+                if ((this.seats.get((row*seat)-1).getPersonName() == null)) {
                     return "Vacío";
                 } else {
                     return "Ocupado";
@@ -176,7 +200,7 @@ public class ReservationService {
             }
         } catch (InvalidSeatException e) {
             System.err.println(e.getMessage());
-            return null;
+            return "";
         }
     }
 
