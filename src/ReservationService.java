@@ -13,7 +13,7 @@ public class ReservationService {
     private boolean continua = true;
 
     //CONSTRUCTOR
-    ReservationService(int rows, int seatsPerRow) {
+    public ReservationService(int rows, int seatsPerRow) {
         this.totalRows = rows;
         this.seatsPerRow = seatsPerRow;
         createSeats(rows, seatsPerRow);
@@ -132,12 +132,12 @@ public class ReservationService {
     public void cancelSeat(int row, int seat) {
         try{
             String status = validateSeatPosition(row, seat);
-            if(status.equals("Ocupado")){
+            if(status.equals("Vacío")){
                 throw new SeatAlreadyEmptyException(
                         "El asiento ya está vacío, no se ha anulado ninguna reserva."
                 );
             }
-            else if (status.equals("Vacio")){
+            else if (status.equals("Ocupado")){
                 this.seats.get((row * seat) - 1).setPersonName(null);
             }
             else {
